@@ -8,8 +8,8 @@ export class StudentsController {
 
   // CREATE
   @Post()
-  create(@Body() createStudentDto: CreateStudentDto) {
-    return this.studentsService.create(createStudentDto);
+  create(@Body() dto: CreateStudentDto) {
+    return this.studentsService.create(dto);
   }
 
   // READ ALL
@@ -21,7 +21,7 @@ export class StudentsController {
   // READ ONE
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studentsService.findOne(id); // removed +id
+    return this.studentsService.findOne(+id); // convert to number
   }
 
   // UPDATE
@@ -30,12 +30,13 @@ export class StudentsController {
     @Param('id') id: string,
     @Body() updateStudentDto: Partial<CreateStudentDto>,
   ) {
-    return this.studentsService.update(id, updateStudentDto); // removed +id
+    return this.studentsService.update(+id, updateStudentDto);
   }
 
   // DELETE
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.studentsService.remove(id); // removed +id
+    return this.studentsService.remove(+id);
   }
 }
+
