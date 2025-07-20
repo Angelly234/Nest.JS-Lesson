@@ -5,30 +5,37 @@ import { CreateStudentDto } from './dto/create-student-dto';
 @Controller('students')
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
+
   // CREATE
   @Post()
   create(@Body() createStudentDto: CreateStudentDto) {
     return this.studentsService.create(createStudentDto);
   }
+
   // READ ALL
   @Get()
   findAll() {
     return this.studentsService.findAll();
   }
+
   // READ ONE
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studentsService.findOne(+id);
+    return this.studentsService.findOne(id); // removed +id
   }
+
   // UPDATE
   @Patch(':id')
-  update(@Param('id') id: string, 
-    @Body() updateStudentDto: Partial<CreateStudentDto>) {
-    return this.studentsService.update(+id, updateStudentDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateStudentDto: Partial<CreateStudentDto>,
+  ) {
+    return this.studentsService.update(id, updateStudentDto); // removed +id
   }
+
   // DELETE
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.studentsService.remove(+id);
+    return this.studentsService.remove(id); // removed +id
   }
 }
